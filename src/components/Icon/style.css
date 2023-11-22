@@ -1,0 +1,21 @@
+/* 为 Icon 添加样式*/
+
+/* 定义 Icon 的 CSS 变量 */
+.hj-icon {
+  --hj-icon-color: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  fill: currentColor;
+  color: var(--hj-icon-color);
+  font-size: inherit;
+}
+
+/* 色彩系统定义的 type 对应设置 */
+/* 2.4 （添加 type 属性）--hj-icon-color 初始设置为 inherit 继承自父元素，后面再根据我们定义的不同的 type 进行覆盖 */
+@each $val in primary,info,success,warning,danger {
+  .hj-icon--$(val) {
+    --hj-icon-color: var(--hj-color-$(val));
+  }
+}

@@ -1,0 +1,124 @@
+/* 该文件用于：存放各种色彩变量（这里属性值都是对应 Element 的） */
+
+/* :root 伪类，是这个文档最根的节点 */
+:root {
+  /* colors */
+  /* 主色、辅助色 */
+  --hj-color-white: #ffffff;
+  --hj-color-black: #000000;
+  
+  /* 使用PostCSS生成对应的CSS颜色变量（扩展、优化） */
+  --colors: (
+    primary: #409eff,
+    /* primary: #5F35FA, */
+    success: #67c23a,
+    warning: #e6a23c,
+    danger: #f56c6c,
+    error: #f56c6c,
+    info: #909399
+  );
+  
+  @each $val, $color in var(--colors) {
+    --hj-color-$(val): $(color);
+    @for $i from 3 to 9 by 2 {
+      --hj-color-$(val)-light-$(i): mix(#fff, $(color), .$(i))
+    }
+    --hj-color-$(val)-light-8: mix(#fff, $(color), .8);
+    --hj-color-$(val)-dark-2: mix(#000, $(color), .2);
+  }
+
+  /* --hj-color-primary: #409eff;
+  --hj-color-primary-light-3: #79bbff;
+  --hj-color-primary-light-5: #a0cfff;
+  --hj-color-primary-light-7: #c6e2ff;
+  --hj-color-primary-light-8: #d9ecff;
+  --hj-color-primary-light-9: #ecf5ff;
+  --hj-color-primary-dark-2: #337ecc;
+  --hj-color-success: #67c23a;
+  --hj-color-success-light-3: #95d475;
+  --hj-color-success-light-5: #b3e19d;
+  --hj-color-success-light-7: #d1edc4;
+  --hj-color-success-light-8: #e1f3d8;
+  --hj-color-success-light-9: #f0f9eb;
+  --hj-color-success-dark-2: #529b2e;
+  --hj-color-warning: #e6a23c;
+  --hj-color-warning-light-3: #eebe77;
+  --hj-color-warning-light-5: #f3d19e;
+  --hj-color-warning-light-7: #f8e3c5;
+  --hj-color-warning-light-8: #faecd8;
+  --hj-color-warning-light-9: #fdf6ec;
+  --hj-color-warning-dark-2: #b88230;
+  --hj-color-danger: #f56c6c;
+  --hj-color-danger-light-3: #f89898;
+  --hj-color-danger-light-5: #fab6b6;
+  --hj-color-danger-light-7: #fcd3d3;
+  --hj-color-danger-light-8: #fde2e2;
+  --hj-color-danger-light-9: #fef0f0;
+  --hj-color-danger-dark-2: #c45656;
+  --hj-color-error: #f56c6c;
+  --hj-color-error-light-3: #f89898;
+  --hj-color-error-light-5: #fab6b6;
+  --hj-color-error-light-7: #fcd3d3;
+  --hj-color-error-light-8: #fde2e2;
+  --hj-color-error-light-9: #fef0f0;
+  --hj-color-error-dark-2: #c45656;
+  --hj-color-info: #909399;
+  --hj-color-info-light-3: #b1b3b8;
+  --hj-color-info-light-5: #c8c9cc;
+  --hj-color-info-light-7: #dedfe0;
+  --hj-color-info-light-8: #e9e9eb;
+  --hj-color-info-light-9: #f4f4f5;
+  --hj-color-info-dark-2: #73767a; */
+  
+  /* 中性色 */
+  --hj-bg-color: #ffffff;
+  --hj-bg-color-page: #f2f3f5;
+  --hj-bg-color-overlay: #ffffff;
+  --hj-text-color-primary: #303133;
+  --hj-text-color-regular: #606266;
+  --hj-text-color-secondary: #909399;
+  --hj-text-color-placeholder: #a8abb2;
+  --hj-text-color-disabled: #c0c4cc;
+  --hj-border-color: #dcdfe6;
+  --hj-border-color-light: #e4e7ed;
+  --hj-border-color-lighter: #ebeef5;
+  --hj-border-color-extra-light: #f2f6fc;
+  --hj-border-color-dark: #d4d7de;
+  --hj-border-color-darker: #cdd0d6;
+  --hj-fill-color: #f0f2f5;
+  --hj-fill-color-light: #f5f7fa;
+  --hj-fill-color-lighter: #fafafa;
+  --hj-fill-color-extra-light: #fafcff;
+  --hj-fill-color-dark: #ebedf0;
+  --hj-fill-color-darker: #e6e8eb;
+  --hj-fill-color-blank: #ffffff;
+  
+  /* border */
+  --hj-border-width: 1px;
+  --hj-border-style: solid;
+  --hj-border-color-hover: var(--hj-text-color-disabled);
+  --hj-border: var(--hj-border-width) var(--hj-border-style) var(--hj-border-color);
+  --hj-border-radius-base: 4px;
+  --hj-border-radius-small: 2px;
+  --hj-border-radius-round: 20px;
+  --hj-border-radius-circle: 100%;
+  
+  /* font */
+  --hj-font-size-extra-large: 20px;
+  --hj-font-size-large: 18px;
+  --hj-font-size-medium: 16px;
+  --hj-font-size-base: 14px;
+  --hj-font-size-small: 13px;
+  --hj-font-size-extra-small: 12px;
+  --hj-font-family: "Hhjvetica Neue", Hhjvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5fae\8f6f\96c5\9ed1", Arial, sans-serif;
+  --hj-font-weight-primary: 500;
+
+  /* disabled */
+  --hj-disabled-bg-color: var(--hj-fill-color-light);
+  --hj-disabled-text-color: var(--hj-text-color-placeholder);
+  --hj-disabled-border-color: var(--hj-border-color-light);
+
+  /* animation */
+  --hj-transition-duration: .3s;
+  --hj-transition-duration-fast: .2s
+}

@@ -1,0 +1,141 @@
+/* 为 Button 添加样式*/
+/* 对于同一个 CSS 属性 如 color: var(xxx); 后面的样式类传入的变量可以覆盖前面的类传入的变量，以实现不同状态的样式变化 */
+/* 定义 Button 的 CSS 变量（属性名需要前缀--）（从全局色彩系统中获取） */
+.hj-button {
+  --hj-button-font-weight: var(--hj-font-weight-primary);
+  --hj-button-border-color: var(--hj-border-color);
+  --hj-button-bg-color: var(--hj-fill-color-blank);
+  --hj-button-text-color: var(--hj-text-color-regular);
+  --hj-button-disabled-text-color: var(--hj-disabled-text-color);
+  --hj-button-disabled-bg-color: var(--hj-fill-color-blank);
+  --hj-button-disabled-border-color: var(--hj-border-color-light);
+  --hj-button-hover-text-color: var(--hj-color-primary);
+  --hj-button-hover-bg-color: var(--hj-color-primary-light-9);
+  --hj-button-hover-border-color: var(--hj-color-primary-light-7);
+  --hj-button-active-text-color: var(--hj-button-hover-text-color);
+  --hj-button-active-border-color: var(--hj-color-primary);
+  --hj-button-active-bg-color: var(--hj-button-hover-bg-color);
+  --hj-button-outline-color: var(--hj-color-primary-light-5);
+  --hj-button-active-color: var(--hj-text-color-primary);
+}
+
+/* Button 不同状态下的样式（default、plain、round、circle、disabled） */
+.hj-button {
+  /* defalut */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  height: 32px;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--hj-button-text-color);
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  transition: .1s;
+  font-weight: var(--hj-button-font-weight);
+  user-select: none;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  background-color: var(--hj-button-bg-color);
+  border: var(--hj-border);
+  border-color: var(--hj-button-border-color);
+  padding: 8px 15px;
+  font-size: var(--hj-font-size-base);
+  border-radius: var(--hj-border-radius-base);
+  & + & {
+    margin-left: 12px;
+  }
+  &:hover,
+  &:focus {
+    color: var(--hj-button-hover-text-color);
+    border-color: var(--hj-button-hover-border-color);
+    background-color: var(--hj-button-hover-bg-color);
+    outline: none;    
+  }
+  &:active {
+    color: var(--hj-button-active-text-color);
+    border-color: var(--hj-button-active-border-color);
+    background-color: var(--hj-button-active-bg-color);
+    outline: none;
+  }
+  /* plain */
+  &.is-plain {
+    --hj-button-hover-text-color: var(--hj-color-primary);
+    --hj-button-hover-bg-color: var(--hj-fill-color-blank);
+    --hj-button-hover-border-color: var(--hj-color-primary);    
+  }
+  /* round */
+  &.is-round {
+    border-radius: var(--hj-border-radius-round);
+  }
+  /* circle */
+  &.is-circle {
+    border-radius: 50%;
+    padding: 8px;
+  }
+  /* disabled */
+  &.is-disabled, &.is-disabled:hover, &.is-disabled:focus, 
+  &[disabled], &[disabled]:hover, &[disabled]:focus 
+  {
+    color: var(--hj-button-disabled-text-color);
+    cursor: not-allowed;
+    background-image: none;
+    background-color: var(--hj-button-disabled-bg-color);
+    border-color: var(--hj-button-disabled-border-color);
+  }
+  /* Icon */
+  /* 属性选择器 之 子字符串匹配选择器，匹配带有一个名为 class 属性的元素，其值至少出现了一次 hj-icon子字符串。 */
+  [class*=hj-icon] + span {
+    margin-left: 6px;
+  }
+}
+
+/* 循环对 type 的不同属性值赋予对应的样式 */
+@each $val in primary, success, info, warning, danger {
+  .hj-button--$(val) {
+    --hj-button-text-color: var(--hj-color-white);
+    --hj-button-bg-color: var(--hj-color-$(val));
+    --hj-button-border-color: var(--hj-color-$(val));
+    --hj-button-outline-color: var(--hj-color-$(val)-light-5);
+    --hj-button-active-color: var(--hj-color-$(val)-dark-2);
+    --hj-button-hover-text-color: var(--hj-color-white);
+    --hj-button-hover-bg-color: var(--hj-color-$(val)-light-3);
+    --hj-button-hover-border-color: var(--hj-color-$(val)-light-3);
+    --hj-button-active-bg-color: var(--hj-color-$(val)-dark-2);
+    --hj-button-active-border-color: var(--hj-color-$(val)-dark-2);
+    --hj-button-disabled-text-color: var(--hj-color-white);
+    --hj-button-disabled-bg-color: var(--hj-color-$(val)-light-5);
+    --hj-button-disabled-border-color: var(--hj-color-$(val)-light-5);
+  }
+  .hj-button--$(val).is-plain {
+    --hj-button-text-color: var(--hj-color-$(val));
+    --hj-button-bg-color: var(--hj-color-$(val)-light-9);
+    --hj-button-border-color: var(--hj-color-$(val)-light-5);
+    --hj-button-hover-text-color: var(--hj-color-white);
+    --hj-button-hover-bg-color: var(--hj-color-$(val));
+    --hj-button-hover-border-color: var(--hj-color-$(val));
+    --hj-button-active-text-color: var(--hj-color-white);
+    &.is-disabled, &[disabled] {
+      --hj-button-disabled-text-color: var(--hj-color-$(val)-light-5);
+      --hj-button-disabled-bg-color: var(--hj-color-$(val)-light-9);
+      --hj-button-disabled-border-color: var(--hj-color-$(val)-light-8);
+    }
+  }
+}
+/* size 的两个属性值 large、small */
+.hj-button--large {
+  --hj-button-size: 40px;
+  height: var(--hj-button-size);
+  padding: 12px 19px;
+  font-size: var(--hj-font-size-base);
+  border-radius: var(--hj-border-radius-base);
+}
+.hj-button--small {
+  --hj-button-size: 24px;
+  height: var(--hj-button-size);
+  padding: 5px 11px;
+  font-size: 12px;
+  border-radius: calc(var(--hj-border-radius-base) - 1px);
+}

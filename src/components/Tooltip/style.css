@@ -1,0 +1,88 @@
+/* 为 Tooltip 添加样式*/
+
+/* 定义 Tooltip 的 CSS 变量 */
+.hj-tooltip {
+  --hj-popover-bg-color: var(--hj-bg-color-overlay);
+  --hj-popover-font-size: var(--hj-font-size-base);
+  --hj-popover-border-color: var(--hj-border-color);
+  --hj-popover-padding: 12px;
+  --hj-popover-border-radius: 4px;
+  display: inline-block;
+}
+
+
+.hj-tooltip {
+  .hj-tooltip__popper {
+    background: var(--hj-popover-bg-color);
+    border-radius: var(--hj-popover-border-radius);
+    border: 1px solid var(--hj-popover-border-color);
+    padding: var(--hj-popover-padding);
+    color: var(--hj-text-color-regular);
+    line-height: 1.4;
+    text-align: justify;
+    font-size: var(--hj-popover-font-size);
+    box-shadow: var(--hj-box-shadow-light);
+    word-break: break-all;
+    box-sizing: border-box;
+    z-index: 1000;
+
+    /* 给 popper 添加箭头 */
+    #arrow,
+    #arrow::before {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      box-sizing: border-box;
+      background: var(--hj-popover-bg-color);
+    }
+    #arrow {
+      visibility: hidden;
+    }
+    #arrow::before {
+      visibility: visible;
+      content: "";
+      /*  将正方形旋转 45° 裁切出一个角 */
+      transform: rotate(45deg);
+    }
+    /* Popper 会自动在 popperNode 上添加属性 如：data-popper-placement="right", 我们通过这个属性来计算箭头的方位 */
+    &[data-popper-placement^='top'] > #arrow {
+      bottom: -5px;
+    }
+    &[data-popper-placement^='bottom'] > #arrow {
+      top: -5px;
+    }
+    &[data-popper-placement^='left'] > #arrow {
+      right: -5px;
+    }
+    &[data-popper-placement^='right'] > #arrow {
+      left: -5px;
+    }
+    /* 给箭头添加上与 popper 一致的边框（计算需要添加的两条边） */
+    &[data-popper-placement^="top"] > #arrow::before {
+      border-right: 1px solid var(--hj-popover-border-color);
+      border-bottom: 1px solid var(--hj-popover-border-color);
+    }
+    &[data-popper-placement^="bottom"] > #arrow::before {
+      border-left: 1px solid var(--hj-popover-border-color);
+      border-top: 1px solid var(--hj-popover-border-color);
+    }
+    &[data-popper-placement^="left"] > #arrow::before {
+      border-right: 1px solid var(--hj-popover-border-color);
+      border-top: 1px solid var(--hj-popover-border-color);
+    }
+    &[data-popper-placement^="right"] > #arrow::before {
+      border-left: 1px solid var(--hj-popover-border-color);
+      border-bottom: 1px solid var(--hj-popover-border-color);
+    }
+  }
+
+  /* Transition - fade */
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity var(--hj-transition-duration)
+  }
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
+}

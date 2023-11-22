@@ -1,0 +1,11 @@
+/* 这个文件用于定义全局 CSS 自定义属性（变量） */
+/* Vite 通过 postcss-import 预配置支持了 CSS `@import` 内联，不需要额外 http 请求了（优化） */
+@import './vars.css';
+@import './reset.css';
+/* 在这个入口文件，要导入所有组件的专属样式 */
+@import '../components/Button/style.css';
+@import '../components/Collapse/style.css';
+@import '../components/Icon/style.css';
+@import '../components/Tooltip/style.css';
+@import '../components/Dropdown/style.css';
+@import '../components/Message/style.css';

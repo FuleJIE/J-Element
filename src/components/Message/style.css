@@ -1,0 +1,61 @@
+/* 为 Message 添加样式*/
+
+/* 定义 Message 的 CSS 变量 */
+.hj-message {
+  --hj-message-bg-color: var(--hj-color-info-light-9);
+  --hj-message-border-color: var(--hj-border-color-lighter);
+  --hj-message-padding: 15px 19px;
+  --hj-message-close-size: 16px;
+  --hj-message-close-icon-color: var(--hj-text-color-placeholder);
+  --hj-message-close-hover-color: var(--hj-text-color-secondary);
+}
+.hj-message {
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  box-sizing: border-box;
+  border-radius: var(--hj-border-radius-base);
+  border-width: var(--hj-border-width);
+  border-style: var(--hj-border-style);
+  border-color: var(--hj-message-border-color);
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--hj-message-bg-color);
+  padding: var(--hj-message-padding);
+  display: flex;
+  align-items: center;
+  transition: top var(--hj-transition-duration), opacity var(--hj-transition-duration), transform var(--hj-transition-duration);
+  .hj-message__content {
+    color: var(--hj-message-text-color);
+    overflow-wrap: anywhere;
+  }
+  &.is-close .hj-message__content {
+    padding-right: 30px;
+  }
+  .hj-message__close {
+    display: flex;
+    align-items: center;
+  }
+  .hj-message__close svg {
+    cursor: pointer;
+  }
+}
+/* each循环生成不同的 type 对应的CSS变量 */
+@each $val in success, info, warning, error { 
+  .hj-message--$(val) {
+    --hj-message-bg-color: var(--hj-color-$(val)-light-9);
+    --hj-message-border-color: var(--hj-color-$(val)-light-8);
+    --hj-message-text-color: var(--hj-color-$(val));
+    .hj-message__close {
+      --hj-icon-color: var(--hj-color-$(val));
+    }
+  }
+}
+
+/* Transition -- fade-up */
+.hj-message.fade-up-enter-from,
+.hj-message.fade-up-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -100%);
+}

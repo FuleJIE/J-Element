@@ -1,0 +1,81 @@
+/* 为 Collapse 添加样式*/
+
+/* 定义 Collapse 的 CSS 变量 */
+.hj-collapse {
+  --hj-collapse-border-color: var(--hj-border-color-light);
+  --hj-collapse-header-height: 48px;
+  --hj-collapse-header-bg-color: var(--hj-fill-color-blank);
+  --hj-collapse-header-text-color: var(--hj-text-color-primary);
+  --hj-collapse-header-font-size: 13px;
+  --hj-collapse-content-bg-color: var(--hj-fill-color-blank);
+  --hj-collapse-content-font-size: 13px;
+  --hj-collapse-content-text-color: var(--hj-text-color-primary);
+  --hj-collapse-disabled-text-color: var(--hj-disabled-text-color);
+  --hj-collapse-disabled-border-color: var(--hj-border-color-lighter);
+  border-top: 1px solid var(--hj-collapse-border-color);
+  border-bottom: 1px solid var(--hj-collapse-border-color);
+}
+/* header */
+.hj-collapse-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--hj-collapse-header-height);
+  line-height: var(--hj-collapse-header-height);
+  background-color: var(--hj-collapse-header-bg-color);
+  color: var(--hj-collapse-header-text-color);
+  cursor: pointer;
+  font-size: var(--hj-collapse-header-font-size);
+  font-weight: 500;
+  transition: border-bottom-color var(--hj-transition-duration);
+  outline: none;
+  border-bottom: 1px solid var(--hj-collapse-border-color);
+  /* 添加不同状态的样式 active disabled */
+  &.is-disabled {
+    color: var(--hj-collapse-disabled-text-color);
+    cursor: not-allowed;
+    background-image: none;
+  }
+  &.is-active {
+    border-bottom-color: transparent;
+    /* 4.1（Icon）添加箭头动画 */
+    .header-angle {
+      transform: rotate(90deg);
+    }
+  }
+  /* 4.1（Icon）添加箭头动画 */
+  .header-angle {
+    transition: transform var(--hj-transition-duration);
+  }
+}
+/* content */
+.hj-collapse-item__content {
+  will-change: height;
+  background-color: var(--hj-collapse-content-bg-color);
+  overflow: hidden;
+  box-sizing: border-box;
+  font-size: var(--hj-collapse-content-font-size);
+  color: var(--hj-collapse-content-text-color);
+  border-bottom: 1px solid var(--hj-collapse-border-color);
+  padding-bottom: 25px;
+}
+
+/* Transition */
+
+/* fade */
+/* .fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s ease-in-out;
+}
+.fade-enter-to, .fade-leave-from {
+  opacity: 1;
+} */
+
+/* 4.2 添加下拉动画 slide。由于要动态计算 item 元素真实高度，进入和离开阶段，通过 JavaScript 钩子完成 */
+/* slide */
+.slide-enter-active, .slide-leave-active {
+  /* transition: height .2s ease-in-out; */
+  transition: height var(--hj-transition-duration);
+}
